@@ -25,7 +25,7 @@ while(<>) {
 		$mode = FIXED;
 	} elsif(/\|BGCOLOR\([^)]*\):選択可能スキル\|/) {
 		$mode = SELECTABLE;
-	} elsif($_ !~ m@\|h$|^/+$@) {
+	} elsif($_ !~ m@\|h$|^/+$|^$@) {
 		next unless defined $name;
 		my @t = split /\|/;
 		my $offset = ($column == 6 ? 0 : 1);
