@@ -24,7 +24,7 @@ while(my $file = shift) {
 	}
 }
 
-print YAML::Any::Dump(\%dat);
+#print YAML::Any::Dump(\%dat);
 foreach my $key (keys %dat) {
 	my ($gap_cnt, $gap_val, $ap_cnt, $ap_val) = (0, 0, 0, 0);
 	foreach my $gap (keys %{$dat{$key}{GAP}}) {
