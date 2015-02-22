@@ -9,3 +9,12 @@ $(OUT): ge2rb.pl ability.yaml $(LIST)
 ability.yaml: ge2rbcol.pl $(LIST)
 	perl ge2rbcol.pl $(LIST) > $@
 
+reverse:
+	mv backup.yaml backup.yaml.bak
+	perl ge2rbrev.pl backup.wiki > backup.yaml
+	mv blood.yaml blood.yaml.bak
+	perl ge2rbrev.pl blood.wiki > blood.yaml
+	mv fareast.yaml fareast.yaml.bak
+	perl ge2rbrev.pl fareast.wiki > fareast.yaml
+	mv backup.yaml backup.yaml.bak
+	perl ge2rbrev.pl backup.wiki > backup.yaml

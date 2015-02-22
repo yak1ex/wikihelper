@@ -14,7 +14,7 @@ my ($name, $cur, $column, $mode, @dat, $temp);
 while(<>) {
 	s/[\r\n]+//;
 	$_ = Encode::decode('utf8', $_);
-	if(m|\*\*\s+(\S+)\s+\[|) {
+	if(m|\*\*\s+(\S+)|) {
 		$name = $1;
 		if(defined $cur && $name ne $cur) {
 			push @dat, $temp;

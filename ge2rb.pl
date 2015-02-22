@@ -34,6 +34,12 @@ sub make_line
 {
 	my $entry = shift;
 	my $rarity ='';
+	if($entry->[1] ne '' && $ability->{$entry->[0]}{RARE} ne '' && $entry->[1] ne $ability->{$entry->[0]}{RARE}) {
+		warn "$entry->[0] rarity $entry->[1] vs $ability->{$entry->[0]}{RARE}";
+	}
+	if($entry->[1] eq '' && exists $ability->{$entry->[0]}{RARE} && $ability->{$entry->[0]}{RARE} ne '') {
+		$entry->[1] = $ability->{$entry->[0]}{RARE};
+	}
 	if(defined $entry->[1] && $entry->[1] ne '') {
 		$rarity = 'BGCOLOR('.$color{$entry->[1]}."):COLOR(#fff):''A''";
 	}

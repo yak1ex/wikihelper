@@ -16,10 +16,23 @@ while(my $file = shift) {
 	foreach my $person (@$dat) {
 		my ($key) = keys %$person;
 		for my $entry (@{$person->{$key}[1]}) {
-			$dat{$entry->[0]}{GAP}{$entry->[3]} ||= 0;
-			$dat{$entry->[0]}{GAP}{$entry->[3]}++;
-			$dat{$entry->[0]} {AP}{$entry->[4]} ||= 0;
-			$dat{$entry->[0]} {AP}{$entry->[4]}++;
+			if($entry->[3] ne '') {
+				$dat{$entry->[0]}{GAP}{$entry->[3]} ||= 0;
+				$dat{$entry->[0]}{GAP}{$entry->[3]}++;
+			}
+			if($entry->[4] ne '') {
+				$dat{$entry->[0]} {AP}{$entry->[4]} ||= 0;
+				$dat{$entry->[0]} {AP}{$entry->[4]}++;
+			}
+			if($entry->[1] ne '') {
+				if(defined $out{$entry->[0]}{RARE} && $out{$entry->[0]}{RARE} ne '') {
+					warn "$out{$entry->[0]}{RARE} vs $entry->[1]" if $out{$entry->[0]}{RARE} ne $entry->[1];
+				}
+				$out{$entry->[0]}{RARE} = $entry->[1];
+			}
+			if($entry->[2] ne '') {
+				$out{$entry->[0]}{SKILL} = $entry->[2];
+			}
 		}
 	}
 }
