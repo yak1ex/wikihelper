@@ -12,6 +12,7 @@ use constant { FIXED => 0, SELECTABLE => 1 };
 my (%dat, %out);
 
 while(my $file = shift) {
+	print STDERR "Loading $file...\n";
 	my $dat = YAML::Any::LoadFile($file);
 	foreach my $person (@$dat) {
 		my ($key) = keys %$person;
@@ -26,7 +27,7 @@ while(my $file = shift) {
 			}
 			if($entry->[1] ne '') {
 				if(defined $out{$entry->[0]}{RARE} && $out{$entry->[0]}{RARE} ne '') {
-					warn "$out{$entry->[0]}{RARE} vs $entry->[1]" if $out{$entry->[0]}{RARE} ne $entry->[1];
+					warn Encode::encode('utf8', "$entry->[0] $out{$entry->[0]}{RARE} vs $entry->[1]") if $out{$entry->[0]}{RARE} ne $entry->[1];
 				}
 				$out{$entry->[0]}{RARE} = $entry->[1];
 			}
