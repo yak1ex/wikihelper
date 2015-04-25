@@ -7,24 +7,30 @@ use warnings;
 use Encode;
 use YAML::Any;
 
-use constant { FIXED => 0, SELECTABLE => 1 }; 
+use constant { FIXED => 0, SELECTABLE => 1, COMMENT => 2 }; 
 
 my ($name, $cur, $column, $mode, @dat, $temp);
 
 while(<>) {
 	s/[\r\n]+//;
 	$_ = Encode::decode('utf8', $_);
-	if(m|\*\*\s+(\S+)|) {
+	if(m|\*\*\s*(\S+)|) {
 		$name = $1;
 		if(defined $cur && $name ne $cur) {
 			push @dat, $temp;
 		}
 		$cur = $name;
 		$temp = { $name => [[],[]] };
+		undef $mode;
 	} elsif(/\|BGCOLOR\([^)]*\):選択外スキル\|/) {
 		$mode = FIXED;
 	} elsif(/\|BGCOLOR\([^)]*\):選択可能スキル\|/) {
 		$mode = SELECTABLE;
+	} elsif(/^\s+$/) {
+		# do nothing
+	} elsif(defined $name && ! defined $mode && $_ !~ m|^/+$| && $_ !~ /\|/) {
+		$temp->{$name}[COMMENT] ||= [];
+		push @{$temp->{$name}[COMMENT]}, $_;
 	} elsif($_ !~ m@\|h$|^/+$|^$@) {
 		next unless defined $name;
 		my @t = split /\|/;

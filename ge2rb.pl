@@ -63,9 +63,18 @@ EOF
 	my $dat = YAML::Any::LoadFile($file);
 	foreach my $person (@$dat) {
 		my ($key) = keys %$person;
+		my $comment = '';
+		if(@{$person->{$key}} == 3) {
+			$comment = join("\n", @{$person->{$key}[2]});
+			$comment .= "\n";
+		}
+		if(@{$person->{$key}[0]} == 0 &&  @{$person->{$key}[1]} == 0) {
+			print $out Encode::encode('utf8', "** $key\n${comment}///////////////////////////////////////////////////////////////////////////////\n");
+			next;
+		}
 		print $out Encode::encode('utf8', <<EOF);
 ** $key
-///////////////////////////////////////////////////////////////////////////////
+${comment}///////////////////////////////////////////////////////////////////////////////
 ||名称|内容|習得GAP|習得AP|習得条件|h
 |>|>|>|>|>|BGCOLOR(#ddf):選択外スキル|
 EOF

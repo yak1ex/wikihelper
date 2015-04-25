@@ -16,6 +16,7 @@ while(my $file = shift) {
 	my $dat = YAML::Any::LoadFile($file);
 	foreach my $person (@$dat) {
 		my ($key) = keys %$person;
+		next if @{$person->{$key}[0]} == 0 &&  @{$person->{$key}[1]} == 0;
 		for my $entry (@{$person->{$key}[1]}) {
 			if($entry->[3] ne '') {
 				$dat{$entry->[0]}{GAP}{$entry->[3]} ||= 0;
