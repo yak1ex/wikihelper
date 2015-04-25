@@ -1,5 +1,6 @@
 LIST = backup.yaml blood.yaml defence.yaml fareast.yaml fareast2.yaml
 OUT = $(LIST:.yaml=.wiki)
+BASE = $(LIST:.yaml=)
 
 all: $(OUT)
 
@@ -10,14 +11,7 @@ ability.yaml: ge2rbcol.pl $(LIST)
 	perl ge2rbcol.pl $(LIST) > $@
 
 reverse:
-	mv backup.yaml backup.yaml.bak
-	perl ge2rbrev.pl backup.wiki > backup.yaml
-	mv blood.yaml blood.yaml.bak
-	perl ge2rbrev.pl blood.wiki > blood.yaml
-	mv fareast.yaml fareast.yaml.bak
-	perl ge2rbrev.pl fareast.wiki > fareast.yaml
-	mv backup.yaml backup.yaml.bak
-	perl ge2rbrev.pl backup.wiki > backup.yaml
+	/bin/sh -c 'for i in $(BASE); do mv $${i}.yaml $${i}.bak.yaml; perl ge2rbrev.pl $${i}.wiki > $${i}.yaml; done'
 
 get:
 	perl ge2rbget.pl url.yaml
