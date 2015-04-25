@@ -18,3 +18,6 @@ reverse:
 	perl ge2rbrev.pl fareast.wiki > fareast.yaml
 	mv backup.yaml backup.yaml.bak
 	perl ge2rbrev.pl backup.wiki > backup.yaml
+
+get:
+	perl ge2rbget.pl url.yaml
