@@ -1,4 +1,4 @@
-LIST = backup.yaml blood.yaml defence.yaml fareast.yaml
+LIST = backup.yaml blood.yaml defence.yaml fareast.yaml fareast2.yaml
 OUT = $(LIST:.yaml=.wiki)
 
 all: $(OUT)
