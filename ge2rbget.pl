@@ -21,7 +21,11 @@ foreach my $key (keys %$url) {
 		$content =~ s/&gt;/>/g;
 		$content =~ s/&quot;/"/g;
 		$content =~ s/&amp;/&/g;
-		open my $fh, "| perl ge2rbrev.pl > ${key}_.yaml";
+		$content =~ s/&#8544;/Ⅰ/g;
+		$content =~ s/&#8545;/Ⅱ/g;
+		$content =~ s/&#8546;/Ⅲ/g;
+		$content =~ s/&#8547;/Ⅳ/g;
+		open my $fh, "| perl ge2rbrev.pl > ${key}#.yaml";
 		print $fh Encode::encode('utf-8', $content);
 		close $fh;
 	} else {

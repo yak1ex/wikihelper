@@ -1,4 +1,4 @@
-LIST = backup.yaml blood.yaml defence.yaml fareast.yaml fareast2.yaml
+LIST = backup1.yaml backup2.yaml blood.yaml bloodA.yaml defence.yaml defenceA.yaml fareast1.yaml fareast1A.yaml fareast2.yaml fareast2A.yaml
 OUT = $(LIST:.yaml=.wiki)
 BASE = $(LIST:.yaml=)
 
@@ -15,3 +15,6 @@ reverse:
 
 get:
 	perl ge2rbget.pl url.yaml
+
+clean:
+	rm *#.yaml *.wiki
